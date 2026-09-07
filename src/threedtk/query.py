@@ -494,9 +494,19 @@ FIELD_ALIASES: dict[str, dict[str, str]] = {
 }
 
 
-def resolve_catalog_path(catalog_path: str | Path | None = None) -> Path:
-    """Resolve a catalogue path, downloading the pinned release if needed."""
-    return _resolve_catalog_path(catalog_path)
+def resolve_catalog_path(
+    catalog_path: str | Path | None = None,
+    *,
+    auto_download: bool = True,
+) -> Path:
+    """Resolve a catalogue path, downloading the pinned release if needed.
+
+    Args:
+        catalog_path: An explicit path, which short-circuits resolution.
+        auto_download: When ``False``, raise instead of fetching a missing
+            catalogue. Used by ``3dtk database where``, which must stay offline.
+    """
+    return _resolve_catalog_path(catalog_path, auto_download=auto_download)
 
 
 def catalog_path_from_context(ctx: Any, catalog_path: str | Path | None = None) -> Path:
