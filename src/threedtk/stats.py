@@ -20,7 +20,6 @@ from rich.table import Table
 
 from threedtk.query import (
     GENOME_QUALITY_CASE_EXPR,
-    TARGETS,
     build_filtered_source_query,
     connect,
     resolve_catalog_path,

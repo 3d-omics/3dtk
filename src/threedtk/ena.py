@@ -18,7 +18,7 @@ gzip CRC alone, so downloads verify the MD5 as well.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable, Iterable, Iterator, Mapping, Sequence
+from typing import Callable, Iterator, Mapping, Sequence
 
 PORTAL_SEARCH_URL = "https://www.ebi.ac.uk/ena/portal/api/search"
 PORTAL_FILEREPORT_URL = "https://www.ebi.ac.uk/ena/portal/api/filereport"

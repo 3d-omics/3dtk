@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import json
-
 import pytest
 from typer.testing import CliRunner
 
@@ -237,3 +235,98 @@ def test_database_where_is_offline_and_explains_itself(monkeypatch) -> None:
 def test_missing_catalogue_is_a_usage_error(tmp_path) -> None:
     result = runner.invoke(app, ["--db", str(tmp_path / "absent.sqlite"), "genomes", "query"])
     assert result.exit_code == 2
+
+
+def _stub_ena(monkeypatch, files_per_run: int = 2):
+    from threedtk.ena import EnaFile, EnaRun
+
+    monkeypatch.setattr(
+        "threedtk.fetch.resolve_runs",
+        lambda accessions, **kwargs: {
+            accession: EnaRun(
+                accession,
+                tuple(
+                    EnaFile(
+                        f"https://ftp.invalid/{accession}_{index}.fastq.gz",
+                        md5="a" * 32,
+                        size=10,
+                    )
+                    for index in range(1, files_per_run + 1)
+                ),
+            )
+            for accession in accessions
+        },
+    )
+
+
+def test_fetch_writes_a_batch_script(catalog, tmp_path, monkeypatch) -> None:
+    _stub_ena(monkeypatch)
+    script = tmp_path / "dl.sh"
+    result = run(
+        catalog, "microsamples", "fetch",
+        "--microsample-id", "CRYO1-001",
+        "--script", str(script),
+        "--output-dir", str(tmp_path),
+        "--accept-terms",
+    )
+    assert result.exit_code == 0
+    assert "queued 2 files" in result.output
+    assert script.exists() and "md5_of" in script.read_text()
+
+
+def test_fetch_reports_records_it_cannot_download(catalog, tmp_path, monkeypatch) -> None:
+    _stub_ena(monkeypatch)
+    result = run(
+        catalog, "macrosamples", "fetch",
+        "--data-type", "Metabolomics",
+        "--output-dir", str(tmp_path),
+        "--manifest-path", str(tmp_path / "manifest.jsonl"),
+        "--accept-terms",
+    )
+    assert result.exit_code == 0
+    assert "published to MetaboLights" in result.output
+    assert "MTBLS1" in result.output
+
+
+def test_unfetchable_records_are_recorded_even_when_nothing_downloads(
+    catalog, tmp_path, monkeypatch
+) -> None:
+    """The manifest must account for every matched record, not only downloads."""
+    import json
+
+    _stub_ena(monkeypatch)
+    manifest = tmp_path / "manifest.jsonl"
+    result = run(
+        catalog, "macrosamples", "fetch",
+        "--data-type", "Metabolomics",
+        "--output-dir", str(tmp_path),
+        "--manifest-path", str(manifest),
+        "--accept-terms",
+    )
+    assert result.exit_code == 0
+    entries = [json.loads(line) for line in manifest.read_text().splitlines()]
+    assert [entry["status"] for entry in entries] == ["metabolights"]
+    assert entries[0]["macrosample_id"] == "X01aI"
+
+
+def test_batch_mode_writes_no_manifest(catalog, tmp_path, monkeypatch) -> None:
+    _stub_ena(monkeypatch)
+    manifest = tmp_path / "manifest.jsonl"
+    run(
+        catalog, "macrosamples", "fetch",
+        "--data-type", "Metabolomics",
+        "--script", str(tmp_path / "dl.sh"),
+        "--manifest-path", str(manifest),
+        "--accept-terms",
+    )
+    assert not manifest.exists()
+
+
+def test_fetch_with_no_matches_says_so(catalog, tmp_path, monkeypatch) -> None:
+    _stub_ena(monkeypatch)
+    result = run(
+        catalog, "microsamples", "fetch",
+        "--microsample-id", "nope", "--output-dir", str(tmp_path), "--accept-terms",
+    )
+    assert result.exit_code == 0
+    assert "No matching microsamples found." in result.output

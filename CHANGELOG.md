@@ -82,6 +82,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `query.resolve_catalog_path` now forwards `auto_download`, so
   `3dtk database where` stays offline instead of raising `TypeError`.
+- The CLI's `fetch` now records unfetchable records in the manifest even when
+  nothing is downloadable, matching the Python API. Previously a fetch that
+  matched only MetaboLights macrosamples returned without accounting for them.
 
 ### Notes
 

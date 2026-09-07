@@ -17,7 +17,7 @@ from rich.console import Console
 import typer
 
 from threedtk.fields import value_field_rows
-from threedtk.filters import FILTERS, FilterOption, filter_key
+from threedtk.filters import FILTERS, filter_key
 from threedtk.output import render_or_export_rows, validate_export_options
 from threedtk.query import (
     DEFAULT_QUERY_LIMIT,
@@ -350,21 +350,44 @@ def add_fetch_command(app: typer.Typer, target: str) -> typer.Typer:
                 f"[yellow]{count:,}[/yellow] {label} skipped: "
                 f"{_REASON_MESSAGES.get(reason, reason)}."
             )
-        if reason_details := [
+        if metabolights := [
             record for record in plan.unfetchable if record.reason == "metabolights"
         ]:
-            accessions = sorted({r.detail for r in reason_details if r.detail})
+            accessions = sorted({record.detail for record in metabolights if record.detail})
             console.print(
                 "  MetaboLights accessions: " + ", ".join(accessions[:10])
                 + (" ..." if len(accessions) > 10 else "")
             )
 
+        manifest = values["manifest_path"]
+        batch_mode = values["batch"] is not None
+
+        def record_unfetchable() -> None:
+            """Log skipped records, so the manifest accounts for every match."""
+            for record in plan.unfetchable:
+                append_manifest_entry(
+                    manifest,
+                    ManifestEntry(
+                        entry_type=singular,
+                        id_field=f"{singular}_id",
+                        id_value=record.record_id,
+                        url=None,
+                        path=None,
+                        checksum=None,
+                        status=record.reason,
+                    ),
+                )
+
         if not plan.jobs:
+            # Nothing to download, so no terms prompt -- but the matched records
+            # that could not be fetched are still worth recording.
+            if not batch_mode:
+                record_unfetchable()
             return
 
         ensure_terms_accepted(console, accept_terms=values["accept_terms"])
 
-        if values["batch"] is not None:
+        if batch_mode:
             script_path = write_batch_script(
                 values["batch"], list(plan.jobs), overwrite=values["overwrite"]
             )
@@ -373,20 +396,7 @@ def add_fetch_command(app: typer.Typer, target: str) -> typer.Typer:
             )
             return
 
-        manifest = values["manifest_path"]
-        for record in plan.unfetchable:
-            append_manifest_entry(
-                manifest,
-                ManifestEntry(
-                    entry_type=singular,
-                    id_field=f"{singular}_id",
-                    id_value=record.record_id,
-                    url=None,
-                    path=None,
-                    checksum=None,
-                    status=record.reason,
-                ),
-            )
+        record_unfetchable()
         results = download_jobs(
             list(plan.jobs),
             manifest_path=manifest,
