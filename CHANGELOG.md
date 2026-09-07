@@ -60,6 +60,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   catalogue in a temp directory and make no network calls, verified by running
   the suite with sockets blocked.
 
+- `scripts/sync_catalog.py`: resolve a release under the Zenodo concept (latest
+  or a pinned `--data-version`), verify it against its `.sha256` sidecar, check
+  its `schema_version`, then `--download` it and/or `--pin` it by rewriting
+  `PINNED_CATALOG`. Says explicitly when it resolved "latest" rather than a pin.
+
 ### Fixed
 
 - `query.resolve_catalog_path` now forwards `auto_download`, so
