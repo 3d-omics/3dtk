@@ -128,7 +128,7 @@ STATS: dict[str, StatsSpec] = {
             "COUNT(*) AS matched_specimens",
             'COUNT(DISTINCT "experiment_id") AS distinct_experiments',
             'COUNT(DISTINCT "species_scientific") AS distinct_species',
-            'COUNT(DISTINCT "treatment_group") AS distinct_treatment_groups',
+            'COUNT(DISTINCT "treatment_name") AS distinct_treatments',
             'COUNT(DISTINCT "pen") AS distinct_pens',
             _non_empty("biosample_accession", "with_biosample"),
             *_range_aggregates("weight", "weight"),
@@ -137,14 +137,16 @@ STATS: dict[str, StatsSpec] = {
             ("Matched specimens", "matched_specimens"),
             ("Distinct experiments", "distinct_experiments"),
             ("Distinct host species", "distinct_species"),
-            ("Distinct treatment groups", "distinct_treatment_groups"),
+            ("Distinct treatments", "distinct_treatments"),
             ("Distinct pens", "distinct_pens"),
             ("With BioSample accession", "with_biosample"),
             ("Weight (avg/min/max)", "weight_range"),
         ),
         breakdowns=(
             BreakdownSpec("Top host species", "species_scientific", '"species_scientific"'),
-            BreakdownSpec("Treatment groups", "treatment_group", '"treatment_group"'),
+            # treatment_group holds unresolved Airtable record ids, so group by
+            # the human-readable name instead. See docs/database.rst.
+            BreakdownSpec("Treatments", "treatment_name", '"treatment_name"'),
             BreakdownSpec("Sex distribution", "sex", '"sex"', limit=10),
         ),
         empty_message="No matching specimens found.",

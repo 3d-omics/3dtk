@@ -1,0 +1,1 @@
+"""Counts sub-app."""

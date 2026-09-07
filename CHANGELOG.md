@@ -34,3 +34,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   usable for spatial analysis.
 - `threedtk.terms`: data-usage gate with placeholder wording marked `TODO`
   rather than invented policy.
+- `threedtk.ena`: ENA Portal API resolution of run accessions to FASTQ URLs,
+  MD5s and sizes. Batches through `POST /search` with an `OR` query, because
+  `filereport?accession=A,B,C` silently returns a header and no rows; 250
+  accessions resolve in two requests.
+- `threedtk.download`: chunked HTTP/FTP downloads with Rich progress, resumable
+  skipping, streaming gzip CRC validation, and verification against the MD5 and
+  byte size ENA publishes per file. `--script` emits a batch script that
+  re-checks MD5s too.
+- `threedtk.fetch`: resolves a filtered record set into download jobs, reporting
+  records with no accession, accessions ENA does not know, and metabolomics
+  macrosamples that point at MetaboLights, separately rather than dropping them.
+- `threedtk.api`: `Database` context manager with seven typed collections, each
+  supporting `query`, `count`, `values` and `stats`; `fetch` on macrosamples and
+  microsamples; `matrices`, `export` and `coordinates` on counts.
+- `threedtk.filters` + `threedtk.commands`: CLI filter specifications and the
+  Typer app factory, so all seven targets share one action grammar by
+  construction.
+- `3dtk` CLI: root overview, `--version`, `--db`, per-target sub-apps, and
+  `3dtk database` (`info`, `where`, `sync`).
+
+### Notes
+
+- Specimen `treatment_group` holds unresolved Airtable record ids rather than
+  readable labels, so column presets and stats breakdowns display `treatment`
+  and `treatment_name` instead. `treatment_group` stays filterable. Resolving it
+  is a `database-build` change.
