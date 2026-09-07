@@ -54,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `3dtk` CLI: root overview, `--version`, `--db`, per-target sub-apps, and
   `3dtk database` (`info`, `where`, `sync`).
 
-- `tests/`: 234 pytest cases covering the query engine, catalogue resolution,
+- `tests/`: a pytest suite covering the query engine, catalogue resolution,
   dense counts export, ENA resolution, downloads, fetch planning, stats, values,
   manifest, terms, the Python API and the CLI. They build a miniature fixture
   catalogue in a temp directory and make no network calls, verified by running
