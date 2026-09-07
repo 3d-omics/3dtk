@@ -10,3 +10,4 @@ docs/_build/
 manifest.jsonl
 downloads/
 src/threedtk/data/*.sqlite
+docs/_build/

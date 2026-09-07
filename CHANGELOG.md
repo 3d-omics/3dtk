@@ -65,6 +65,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   its `schema_version`, then `--download` it and/or `--pin` it by rewriting
   `PINNED_CATALOG`. Says explicitly when it resolved "latest" rather than a pin.
 
+- Repository furniture: `README.md` (documenting the `pip install 3dtk` →
+  `import threedtk` split prominently), `RELEASING.md` with the four version
+  lines and the outstanding pre-release tasks, `CITATION.cff`, `.zenodo.json`,
+  `codemeta.json`, GPLv3 `LICENSE`.
+- `.github/workflows/ci.yml`: pytest on Python 3.10–3.14, `python -m build`, CLI
+  smoke tests against real records, and a step that rebuilds every count matrix
+  in the catalogue and checks it against `source_files.row_count`. The catalogue
+  is cached by `data_version`, which is safe because the pin is immutable.
+- `.github/workflows/release.yml`: PyPI publish via Trusted Publishing, gated on
+  a check that the pinned DOI is a version DOI rather than the concept DOI.
+- `docs/`: Sphinx + Read the Docs, one page per target plus installation,
+  quickstart, database, identifiers, outputs, fetching, api and advanced.
+
 ### Fixed
 
 - `query.resolve_catalog_path` now forwards `auto_download`, so

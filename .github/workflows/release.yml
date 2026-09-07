@@ -1,0 +1,112 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install release and test dependencies
+        run: python -m pip install ".[dev,release]"
+
+      - name: Verify the pinned catalogue is a version DOI, not the concept
+        run: |
+          python - <<'PY'
+          from threedtk.catalog import PINNED_CATALOG
+          from threedtk.query import SUPPORTED_SCHEMA_VERSIONS
+
+          if PINNED_CATALOG.version_doi == PINNED_CATALOG.concept_doi:
+              raise SystemExit(
+                  "PINNED_CATALOG.version_doi must name one immutable version "
+                  "record; the concept DOI always follows 'latest'."
+              )
+          if len(PINNED_CATALOG.sha256) != 64:
+              raise SystemExit("PINNED_CATALOG.sha256 is not a SHA-256 digest.")
+          if PINNED_CATALOG.schema_version not in SUPPORTED_SCHEMA_VERSIONS:
+              raise SystemExit(
+                  f"Pinned schema_version {PINNED_CATALOG.schema_version} is not in "
+                  f"SUPPORTED_SCHEMA_VERSIONS {sorted(SUPPORTED_SCHEMA_VERSIONS)}."
+              )
+          print(f"Pinned {PINNED_CATALOG.data_version} ({PINNED_CATALOG.version_doi})")
+          PY
+
+      - name: Run test suite
+        run: python -m pytest
+
+      - name: Build sdist and wheel
+        run: python -m build
+
+      - name: Validate distributions
+        run: python -m twine check dist/*
+
+      - name: Smoke test the built wheel
+        run: |
+          python -m pip install --force-reinstall dist/*.whl
+          3dtk --version
+          3dtk --help
+          python -c "import threedtk; print(threedtk.__version__)"
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/3dtk
+    permissions:
+      # Trusted Publishing: no PyPI token is stored anywhere.
+      id-token: write
+
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes \
+            dist/*

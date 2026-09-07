@@ -1,0 +1,35 @@
+{
+  "title": "3dtk: the 3D'omics ToolKit",
+  "description": "<p>A Python package and command-line tool to find, summarise, export, and download records from the 3D'omics data catalogue. Provides a uniform query/values/stats/fields/fetch grammar across the experiment, specimen, macrosample, cryosection, microsample, genome and count levels; dense reconstruction of the sparse genome-by-sample count matrices; spatially resolved microsample metadata; and checksum-verified downloads resolved through the ENA Portal API.</p>",
+  "upload_type": "software",
+  "license": "GPL-3.0-or-later",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Alberdi, Antton",
+      "affiliation": "University of Copenhagen",
+      "orcid": "0000-0002-2875-6446"
+    }
+  ],
+  "keywords": [
+    "bioinformatics",
+    "metagenomics",
+    "microbiome",
+    "spatial omics",
+    "3D-omics",
+    "command-line tool"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.22159111",
+      "relation": "isSupplementTo",
+      "resource_type": "dataset",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://github.com/3d-omics/3dtk",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

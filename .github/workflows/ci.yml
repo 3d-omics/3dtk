@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install package and test dependencies
+        run: python -m pip install ".[dev]" build
+
+      # The test suite builds its own miniature catalogue and makes no network
+      # calls, so it runs before the catalogue is fetched.
+      - name: Run test suite
+        run: python -m pytest
+
+      - name: Build sdist and wheel
+        run: python -m build
+
+      - name: Read the pinned catalogue version
+        id: pin
+        run: |
+          python - >> "$GITHUB_OUTPUT" <<'PY'
+          from threedtk.catalog import PINNED_CATALOG
+          print(f"data_version={PINNED_CATALOG.data_version}")
+          PY
+
+      # 3dtk ships with no bundled catalogue, so the smoke tests need the real
+      # artefact. Cache it by data_version: the pin is immutable, so a hit is
+      # always the right bytes, and the SHA-256 is verified on a miss anyway.
+      - name: Cache the 3D'omics catalogue
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/3dtk
+          key: 3domics-catalog-${{ steps.pin.outputs.data_version }}
+
+      - name: Download the catalogue if it was not cached
+        run: 3dtk database sync
+
+      - name: Smoke test the CLI against real records
+        run: |
+          3dtk --help
+          3dtk database info
+          3dtk experiments query --limit 1
+          3dtk specimens query --experiment-id G --limit 1
+          3dtk specimens stats --sex female
+          3dtk macrosamples query --data-type Metabolomics --limit 1
+          3dtk cryosections query --has-image --limit 1
+          3dtk microsamples query --experiment-id G --sex female --columns context --limit 1
+          3dtk microsamples query --x-min 13000 --x-max 14000 --columns spatial --limit 1
+          3dtk microsamples stats --experiment-id G
+          3dtk genomes query --genus Faeciplasma --quality high --limit 1
+          3dtk genomes values --field phylum --limit 5
+          3dtk counts matrices --level macro
+          3dtk counts stats --level micro
+
+      - name: Verify a dense export round-trips against the catalogue's provenance
+        run: |
+          python - <<'PY'
+          import threedtk
+
+          with threedtk.Database() as db:
+              matrices = db.counts.matrices()
+              assert matrices, "catalogue reports no count matrices"
+              for source in matrices:
+                  # export() verifies non-zero cells against source_files.row_count
+                  matrix = db.counts.export(source_id=source.source_id)
+                  assert len(matrix.genomes) == len(source.genomes)
+                  assert len(matrix.samples) == len(source.samples)
+              print(f"{len(matrices)} matrices rebuilt and verified")
+          PY

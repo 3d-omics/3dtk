@@ -1,0 +1,46 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "3dtk",
+  "description": "A Python package and command-line tool to find, summarise, export, and download records from the 3D'omics data catalogue.",
+  "version": "0.1.0",
+  "programmingLanguage": "Python",
+  "runtimePlatform": "Python 3.10+",
+  "license": "https://spdx.org/licenses/GPL-3.0-or-later",
+  "codeRepository": "https://github.com/3d-omics/3dtk",
+  "issueTracker": "https://github.com/3d-omics/3dtk/issues",
+  "downloadUrl": "https://pypi.org/project/3dtk/",
+  "readme": "https://github.com/3d-omics/3dtk/blob/main/README.md",
+  "keywords": [
+    "bioinformatics",
+    "metagenomics",
+    "microbiome",
+    "spatial omics",
+    "3D-omics"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Antton",
+      "familyName": "Alberdi",
+      "email": "antton.alberdi@sund.ku.dk",
+      "@id": "https://orcid.org/0000-0002-2875-6446",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "University of Copenhagen"
+      }
+    }
+  ],
+  "softwareRequirements": [
+    "platformdirs>=4.0.0",
+    "requests>=2.31.0",
+    "rich>=13.7.0",
+    "typer>=0.12.0"
+  ],
+  "isBasedOn": "https://github.com/earthhologenome/ehitk",
+  "referencePublication": {
+    "@type": "Dataset",
+    "name": "3D'omics data catalogue",
+    "identifier": "https://doi.org/10.5281/zenodo.22159111"
+  }
+}

@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use 3dtk, please cite both the software and the data catalogue."
+title: "3dtk: the 3D'omics ToolKit"
+abstract: >-
+  A Python package and command-line tool to find, summarise, export, and
+  download records from the 3D'omics data catalogue, including dense
+  reconstruction of sparse genome-by-sample count matrices and spatially
+  resolved microsample metadata.
+type: software
+authors:
+  - family-names: Alberdi
+    given-names: Antton
+    email: antton.alberdi@sund.ku.dk
+    affiliation: University of Copenhagen
+    orcid: "https://orcid.org/0000-0002-2875-6446"
+repository-code: "https://github.com/3d-omics/3dtk"
+url: "https://3dtk.readthedocs.io/"
+license: GPL-3.0-or-later
+version: 0.1.0
+keywords:
+  - bioinformatics
+  - metagenomics
+  - microbiome
+  - spatial transcriptomics
+  - 3D-omics
+references:
+  - type: database
+    title: "3D'omics data catalogue"
+    abstract: "The published SQLite catalogue that 3dtk reads."
+    doi: "10.5281/zenodo.22159111"
+    license: CC-BY-4.0
+    authors:
+      - name: "The 3D'omics consortium"
