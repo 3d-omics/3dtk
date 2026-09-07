@@ -22,3 +22,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `threedtk.query`: the declarative `TargetConfig`/`TARGETS` engine, filter
   building, `--where` validation, column presets, `catalog_meta` reading, and
   `schema_version` validation against `SUPPORTED_SCHEMA_VERSIONS = {2}`.
+- `threedtk.output`, `threedtk.values`, `threedtk.fields`, `threedtk.stats`:
+  Rich table / CSV / TSV rendering, distinct-value counts, field listings, and
+  declarative per-target summaries with top-N breakdowns.
+- `threedtk.counts`: dense reconstruction of the sparse count matrices. Axes
+  come from `matrix_axes` rather than `SELECT DISTINCT`, so an all-zero genome
+  or sample keeps its place. Verified to reproduce all 82 original CSVs
+  cell-for-cell, including row and column order. Matrices within an experiment
+  share a genome axis and can be merged into one wide matrix, and a companion
+  coordinate table aligned to the matrix columns makes the export directly
+  usable for spatial analysis.
+- `threedtk.terms`: data-usage gate with placeholder wording marked `TODO`
+  rather than invented policy.
