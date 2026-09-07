@@ -1,0 +1,198 @@
+{
+  "experiments": {
+    "default": [
+      "experiment_id",
+      "experiment_name",
+      "experiment_type",
+      "start_date",
+      "mag_count",
+      "has_genome_catalogue"
+    ],
+    "mag": [
+      "experiment_id",
+      "mag_count",
+      "mag_completeness_avg",
+      "mag_contamination_avg",
+      "mag_new_species_pct"
+    ],
+    "accession": [
+      "experiment_id",
+      "bioproject_accession",
+      "bioproject_link",
+      "doi"
+    ]
+  },
+  "specimens": {
+    "default": [
+      "specimen_id",
+      "experiment_id",
+      "species_scientific",
+      "sex",
+      "treatment_group",
+      "weight"
+    ],
+    "treatment": [
+      "specimen_id",
+      "experiment_id",
+      "treatment",
+      "treatment_name",
+      "treatment_group",
+      "pen",
+      "dpi"
+    ],
+    "accession": [
+      "specimen_id",
+      "biosample_accession",
+      "biosample_link"
+    ]
+  },
+  "macrosamples": {
+    "default": [
+      "macrosample_id",
+      "specimen_id",
+      "experiment_id",
+      "data_type",
+      "sample_type",
+      "ena_accession"
+    ],
+    "accession": [
+      "macrosample_id",
+      "data_type",
+      "ena_accession",
+      "ena_link",
+      "metabolights_accession",
+      "metabolights_link"
+    ],
+    "sequencing": [
+      "macrosample_id",
+      "library_id",
+      "run_accession",
+      "experimental_unit"
+    ]
+  },
+  "cryosections": {
+    "default": [
+      "cryosection_id",
+      "macrosample_id",
+      "specimen_id",
+      "experiment_id",
+      "position",
+      "microsample_count",
+      "has_image"
+    ],
+    "slide": [
+      "cryosection_id",
+      "slide",
+      "slide_date",
+      "position",
+      "has_image"
+    ]
+  },
+  "microsamples": {
+    "default": [
+      "microsample_id",
+      "cryosection_id",
+      "specimen_id",
+      "experiment_id",
+      "sample_type",
+      "x_coord",
+      "y_coord"
+    ],
+    "spatial": [
+      "microsample_id",
+      "cryosection_id",
+      "sample_type",
+      "size",
+      "x_coord",
+      "y_coord",
+      "pixel_x",
+      "pixel_y"
+    ],
+    "sequencing": [
+      "microsample_id",
+      "library_id",
+      "run_accession",
+      "ena_link",
+      "shape",
+      "pixel_x",
+      "pixel_y"
+    ],
+    "context": [
+      "microsample_id",
+      "cryosection_id",
+      "cryosection_position",
+      "macrosample_id",
+      "specimen_id",
+      "species_scientific",
+      "sex",
+      "treatment_group",
+      "x_coord",
+      "y_coord"
+    ]
+  },
+  "genomes": {
+    "default": [
+      "genome",
+      "experiment_id",
+      "quality",
+      "completeness",
+      "contamination",
+      "phylum",
+      "genus",
+      "species"
+    ],
+    "taxonomy": [
+      "genome",
+      "experiment_id",
+      "domain",
+      "phylum",
+      "class",
+      "order",
+      "family",
+      "genus",
+      "species"
+    ],
+    "quality": [
+      "genome",
+      "experiment_id",
+      "quality",
+      "completeness",
+      "contamination",
+      "length"
+    ]
+  },
+  "counts": {
+    "default": [
+      "level",
+      "experiment_id",
+      "genome",
+      "sample",
+      "count",
+      "phylum",
+      "genus"
+    ],
+    "spatial": [
+      "level",
+      "cryosection_id",
+      "genome",
+      "sample",
+      "count",
+      "x_coord",
+      "y_coord",
+      "pixel_x",
+      "pixel_y"
+    ],
+    "taxonomy": [
+      "genome",
+      "sample",
+      "count",
+      "domain",
+      "phylum",
+      "class",
+      "order",
+      "family",
+      "genus",
+      "species"
+    ]
+  }
+}

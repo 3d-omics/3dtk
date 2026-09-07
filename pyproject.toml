@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "3dtk"
+version = "0.1.0"
+description = "3D'omics ToolKit: query, summarise, export, and download the 3D'omics data catalogue"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  {name = "Antton Alberdi", email = "antton.alberdi@sund.ku.dk"},
+]
+maintainers = [
+  {name = "Antton Alberdi", email = "antton.alberdi@sund.ku.dk"},
+]
+license = {file = "LICENSE"}
+keywords = [
+  "bioinformatics",
+  "cli",
+  "metagenomics",
+  "microbiome",
+  "spatial",
+  "sqlite",
+  "3d-omics",
+]
+classifiers = [
+  "Environment :: Console",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Topic :: Utilities",
+]
+dependencies = [
+  "platformdirs>=4.0.0",
+  "requests>=2.31.0",
+  "rich>=13.7.0",
+  "typer>=0.12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+release = [
+  "build>=1.2.0",
+  "twine>=5.0.0",
+]
+
+[project.scripts]
+"3dtk" = "threedtk.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/3d-omics/3dtk"
+Repository = "https://github.com/3d-omics/3dtk"
+Issues = "https://github.com/3d-omics/3dtk/issues"
+Documentation = "https://3dtk.readthedocs.io/"
+Changelog = "https://github.com/3d-omics/3dtk/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+license-files = ["LICENSE"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+threedtk = ["data/*.json", "data/*.sqlite"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

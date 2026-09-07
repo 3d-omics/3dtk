@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+docs/_build/
+manifest.jsonl
+downloads/
+src/threedtk/data/*.sqlite
