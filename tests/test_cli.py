@@ -18,6 +18,11 @@ def run(catalog, *args, **kwargs):
     return runner.invoke(app, ["--db", str(catalog), *args], **kwargs)
 
 
+def error_output(result) -> str:
+    """Return CLI diagnostics regardless of the Click/Typer output stream."""
+    return result.output + result.stderr
+
+
 def test_version_is_reported() -> None:
     result = runner.invoke(app, ["--version"])
     assert result.exit_code == 0
@@ -127,13 +132,13 @@ def test_columns_preset_and_all(catalog) -> None:
 def test_unknown_column_is_a_usage_error(catalog) -> None:
     result = run(catalog, "genomes", "query", "--columns", "nope")
     assert result.exit_code == 2
-    assert "--columns" in result.output
+    assert "--columns" in error_output(result)
 
 
 def test_unsafe_where_is_a_usage_error(catalog) -> None:
     result = run(catalog, "genomes", "query", "--where", "1=1; DROP TABLE genomes")
     assert result.exit_code == 2
-    assert "--where" in result.output
+    assert "--where" in error_output(result)
 
 
 def test_safe_where_is_accepted(catalog) -> None:
@@ -154,7 +159,7 @@ def test_values_reports_counts(catalog) -> None:
 def test_unknown_values_field_is_a_usage_error(catalog) -> None:
     result = run(catalog, "genomes", "values", "--field", "nope")
     assert result.exit_code == 2
-    assert "--field" in result.output
+    assert "--field" in error_output(result)
 
 
 @pytest.mark.parametrize("target", FETCHABLE)
