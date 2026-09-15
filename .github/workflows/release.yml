@@ -28,8 +28,8 @@ jobs:
       - name: Verify the pinned catalogue is a version DOI, not the concept
         run: |
           python - <<'PY'
-          from threedtk.catalog import PINNED_CATALOG
-          from threedtk.query import SUPPORTED_SCHEMA_VERSIONS
+          from py3dtk.catalog import PINNED_CATALOG
+          from py3dtk.query import SUPPORTED_SCHEMA_VERSIONS
 
           if PINNED_CATALOG.version_doi == PINNED_CATALOG.concept_doi:
               raise SystemExit(
@@ -60,7 +60,7 @@ jobs:
           python -m pip install --force-reinstall dist/*.whl
           3dtk --version
           3dtk --help
-          python -c "import threedtk; print(threedtk.__version__)"
+          python -c "import py3dtk; print(py3dtk.__version__)"
 
       - name: Upload distributions
         uses: actions/upload-artifact@v4

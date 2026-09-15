@@ -22,8 +22,8 @@ import re
 import sqlite3
 from typing import Any, Mapping
 
-from threedtk.catalog import resolve_catalog_path as _resolve_catalog_path
-from threedtk.sources import (
+from py3dtk.catalog import resolve_catalog_path as _resolve_catalog_path
+from py3dtk.sources import (
     COUNTS_SOURCE,
     CRYOSECTIONS_SOURCE,
     EXPERIMENTS_SOURCE,
@@ -35,7 +35,7 @@ from threedtk.sources import (
 
 DEFAULT_QUERY_LIMIT = 50
 CATALOG_META_TABLE = "catalog_meta"
-CUSTOM_COLUMNS_RESOURCE = resources.files("threedtk").joinpath(
+CUSTOM_COLUMNS_RESOURCE = resources.files("py3dtk").joinpath(
     "data", "custom_columns.json"
 )
 

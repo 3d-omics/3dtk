@@ -1,18 +1,18 @@
 """Public Python API for the 3D'omics ToolKit.
 
-This module defines everything exposed at the top level of the ``threedtk``
+This module defines everything exposed at the top level of the ``py3dtk``
 package: the :class:`Database` entry point, one collection per level of the
 3D'omics hierarchy, and the typed records they return.
 
 Note the name split -- the distribution is ``3dtk`` but the import package is
-``threedtk``, because Python identifiers cannot begin with a digit::
+``py3dtk``, because Python identifiers cannot begin with a digit::
 
     pip install 3dtk       # distribution
-    import threedtk        # package
+    import py3dtk        # package
 
 Example:
-    >>> import threedtk
-    >>> with threedtk.Database() as db:
+    >>> import py3dtk
+    >>> with py3dtk.Database() as db:
     ...     rows = db.microsamples.query(experiment_id="G", sex="female", limit=5)
     >>> rows[0].x_coord  # doctest: +SKIP
     13851.42
@@ -26,8 +26,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
-from threedtk.catalog import CatalogError, ChecksumMismatchError
-from threedtk.counts import (
+from py3dtk.catalog import CatalogError, ChecksumMismatchError
+from py3dtk.counts import (
     CountsError,
     DenseMatrix,
     MatrixSource,
@@ -35,11 +35,11 @@ from threedtk.counts import (
     list_matrix_sources,
     sample_coordinates,
 )
-from threedtk.download import DownloadJob, DownloadResult, download_jobs, write_batch_script
-from threedtk.ena import EnaRun
-from threedtk.fetch import FetchPlan, UnfetchableRecord, plan_fetch
-from threedtk.manifest import ManifestEntry, append_manifest_entry
-from threedtk.query import (
+from py3dtk.download import DownloadJob, DownloadResult, download_jobs, write_batch_script
+from py3dtk.ena import EnaRun
+from py3dtk.fetch import FetchPlan, UnfetchableRecord, plan_fetch
+from py3dtk.manifest import ManifestEntry, append_manifest_entry
+from py3dtk.query import (
     DEFAULT_QUERY_LIMIT,
     UnsupportedSchemaVersionError,
     count_rows,
@@ -48,8 +48,8 @@ from threedtk.query import (
     resolve_catalog_path,
     validate_catalog_schema,
 )
-from threedtk.stats import StatBreakdown, TargetStats, target_stats
-from threedtk.values import DEFAULT_VALUES_LIMIT, value_rows
+from py3dtk.stats import StatBreakdown, TargetStats, target_stats
+from py3dtk.values import DEFAULT_VALUES_LIMIT, value_rows
 
 
 @dataclass(frozen=True, slots=True)
@@ -322,8 +322,8 @@ _FIELD_COLUMNS = {"class_": "class"}
 class Database:
     """Python interface to the 3D'omics SQLite catalogue.
 
-    Opens the catalogue resolved by :func:`threedtk.catalog.resolve_catalog_path`
-    -- an explicit ``path``, then ``THREEDTK_DB``, then the user cache
+    Opens the catalogue resolved by :func:`py3dtk.catalog.resolve_catalog_path`
+    -- an explicit ``path``, then ``PY3DTK_DB``, then the user cache
     (downloading the pinned release on first use), then a bundled resource --
     and exposes one collection per level:
 
@@ -336,8 +336,8 @@ class Database:
     :attr:`counts` adds ``matrices()`` and ``export()``.
 
     Example:
-        >>> import threedtk
-        >>> with threedtk.Database() as db:
+        >>> import py3dtk
+        >>> with py3dtk.Database() as db:
         ...     genomes = db.genomes.query(quality="high", genus="Faeciplasma")
         ...     matrix = db.counts.export(experiment_id="G", level="micro")
 
@@ -638,7 +638,7 @@ class CountsCollection(_Collection):
             **taxonomy: GTDB rank filters, e.g. ``genus="Faeciplasma"``.
 
         Returns:
-            A :class:`~threedtk.counts.DenseMatrix` whose axis order follows
+            A :class:`~py3dtk.counts.DenseMatrix` whose axis order follows
             ``matrix_axes``.
         """
         self._database._ensure_open()

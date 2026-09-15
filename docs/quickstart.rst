@@ -85,9 +85,9 @@ Python
 
 .. code-block:: python
 
-   import threedtk
+   import py3dtk
 
-   with threedtk.Database() as db:
+   with py3dtk.Database() as db:
        print(db.specimens.count(sex="female"))
        for row in db.genomes.values("phylum", limit=5).rows:
            print(row.value, row.count)

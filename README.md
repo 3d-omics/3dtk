@@ -18,22 +18,22 @@ pip install 3dtk
 3dtk microsamples query --experiment-id G --sex female --columns context
 ```
 
-## `pip install 3dtk` → `import threedtk`
+## `pip install 3dtk` → `import py3dtk`
 
 Python identifiers cannot begin with a digit, so `import 3dtk` is a
 `SyntaxError`. The distribution and the console script are `3dtk`; the **import
-package is `threedtk`** — the same split as `scikit-learn` → `sklearn`.
+package is `py3dtk`** — the same split as `scikit-learn` → `sklearn`.
 
 | Surface | Name |
 | --- | --- |
 | PyPI distribution | `3dtk` |
 | Console script | `3dtk` |
-| Import package | `threedtk` |
+| Import package | `py3dtk` |
 
 ```python
-import threedtk
+import py3dtk
 
-with threedtk.Database() as db:
+with py3dtk.Database() as db:
     genomes = db.genomes.query(quality="high", genus="Faeciplasma")
 ```
 
@@ -61,7 +61,7 @@ SHA-256. A download that fails verification is discarded, never used.
 `3dtk` resolves the catalogue in this order, and the first hit wins:
 
 1. an explicit `--db` / `path=` argument,
-2. the `THREEDTK_DB` environment variable,
+2. the `PY3DTK_DB` environment variable,
 3. the user cache (`3dtk database sync`, or a lazy first-use download),
 4. a bundled package resource, if one was shipped.
 
@@ -152,9 +152,9 @@ than pretending it can download them.
 ## Python API
 
 ```python
-import threedtk
+import py3dtk
 
-with threedtk.Database() as db:
+with py3dtk.Database() as db:
     db.specimens.count(sex="female")
     db.genomes.values("phylum", limit=5)
     db.microsamples.stats(experiment_id="G")

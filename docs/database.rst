@@ -33,7 +33,7 @@ Where the catalogue comes from
 Resolution order — first hit wins:
 
 1. an explicit ``--db`` / ``path=`` argument;
-2. the ``THREEDTK_DB`` environment variable;
+2. the ``PY3DTK_DB`` environment variable;
 3. the user cache, populated by ``3dtk database sync`` or a lazy first-use
    download;
 4. a bundled package resource, if one was shipped.
@@ -53,7 +53,7 @@ To use a catalogue you already have:
 .. code-block:: bash
 
    3dtk --db /path/to/3domics-2026.08.29.sqlite genomes query
-   export THREEDTK_DB=/path/to/3domics-2026.08.29.sqlite
+   export PY3DTK_DB=/path/to/3domics-2026.08.29.sqlite
 
 Tables
 ------

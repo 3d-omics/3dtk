@@ -80,14 +80,14 @@ catalogue whose `schema_version` this `3dtk` cannot read.
 python scripts/sync_catalog.py --data-version <data_version> --pin --download
 ```
 
-`--pin` rewrites `PINNED_CATALOG` in `src/threedtk/catalog.py`; `--download`
+`--pin` rewrites `PINNED_CATALOG` in `src/py3dtk/catalog.py`; `--download`
 puts the verified artefact in the local cache so you can exercise it. Review the
 diff: `data_version`, `schema_version`, `sha256`, `url`, `version_doi` and
 `size_bytes` should all have moved together.
 
 If `schema_version` changed, that is a **breaking data change**: update the
 readers, add the new version to `SUPPORTED_SCHEMA_VERSIONS` in
-`src/threedtk/query.py`, and decide whether to keep reading the old one.
+`src/py3dtk/query.py`, and decide whether to keep reading the old one.
 
 ### 4. Verify against the real catalogue
 
@@ -141,12 +141,12 @@ is a *separate* concept from the **catalogue** concept DOI that
 
 ## Outstanding pre-release tasks
 
-- [ ] **Data usage terms.** `src/threedtk/terms.py` ships placeholder wording
+- [ ] **Data usage terms.** `src/py3dtk/terms.py` ships placeholder wording
       marked `TODO`. Replace it with the consortium's agreed text and contact
       address before the first public release, or drop the gate.
-- [ ] **`threedtk` name reservation.** After the first release, publish a stub
-      `threedtk` distribution that simply depends on `3dtk`, so the import name
-      cannot be squatted and `pip install threedtk` works. Agreed as a post-v1
+- [ ] **`py3dtk` name reservation.** After the first release, publish a stub
+      `py3dtk` distribution that simply depends on `3dtk`, so the import name
+      cannot be squatted and `pip install py3dtk` works. Agreed as a post-v1
       step.
 - [ ] **Read the Docs.** Create the `3dtk` project. The subdomain
       `3dtk.readthedocs.io` is valid and available (a leading digit is legal in

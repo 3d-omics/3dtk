@@ -7,7 +7,7 @@ pinned identity of the release this version of ``3dtk`` was built against.
 Resolution order (:func:`resolve_catalog_path`):
 
 1. an explicit ``--db`` / ``path=`` argument,
-2. the ``THREEDTK_DB`` environment variable,
+2. the ``PY3DTK_DB`` environment variable,
 3. the user cache, populated by ``3dtk database sync`` or a lazy first-use
    download,
 4. a bundled package resource, if one was shipped.
@@ -15,7 +15,7 @@ Resolution order (:func:`resolve_catalog_path`):
 The shipped default is step 3: the wheel carries no catalogue and the 59 MB
 artefact is fetched once, verified against a pinned SHA-256, and cached. Step 4
 exists so that bundling becomes a packaging decision -- drop a ``.sqlite`` into
-``src/threedtk/data/`` and it is found without touching the query layer.
+``src/py3dtk/data/`` and it is found without touching the query layer.
 
 A pinned build never silently follows "latest". :data:`PINNED_CATALOG` names one
 immutable Zenodo *version* record; the concept DOI is for citation only.
@@ -35,8 +35,8 @@ from typing import Callable, Iterable
 from platformdirs import user_cache_dir
 
 APP_NAME = "3dtk"
-ENV_VAR = "THREEDTK_DB"
-PACKAGE_DATA = resources.files("threedtk").joinpath("data")
+ENV_VAR = "PY3DTK_DB"
+PACKAGE_DATA = resources.files("py3dtk").joinpath("data")
 
 _RESOURCE_PATHS = ExitStack()
 atexit.register(_RESOURCE_PATHS.close)
@@ -121,7 +121,7 @@ def bundled_catalog_path() -> Path | None:
     """Return a bundled catalogue resource, or ``None`` when none was shipped.
 
     Bundling is off by default. When a ``.sqlite`` is present under
-    ``threedtk/data/`` it becomes the last-resort source, so an offline-first
+    ``py3dtk/data/`` it becomes the last-resort source, so an offline-first
     build needs no code change -- only a packaging one.
     """
     try:

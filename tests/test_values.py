@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-from threedtk.query import QueryValidationError
-from threedtk.values import value_rows
+from py3dtk.query import QueryValidationError
+from py3dtk.values import value_rows
 
 
 def test_counts_are_ordered_by_descending_count(catalog) -> None:
@@ -61,7 +61,7 @@ def test_non_positive_limit_is_rejected(catalog) -> None:
 
 
 def test_fields_listing_marks_aliases() -> None:
-    from threedtk.fields import value_field_rows
+    from py3dtk.fields import value_field_rows
 
     rows = {row["field"]: row for row in value_field_rows("specimens")}
     assert rows["species"]["type"] == "alias"

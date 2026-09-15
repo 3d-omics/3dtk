@@ -248,10 +248,10 @@ def catalog(tmp_path_factory) -> Path:
 @pytest.fixture(autouse=True)
 def isolate_catalog_resolution(monkeypatch, tmp_path):
     """Keep tests off the network and out of the user's real cache."""
-    monkeypatch.delenv("THREEDTK_DB", raising=False)
-    monkeypatch.setattr("threedtk.catalog.cache_dir", lambda: tmp_path / "cache")
+    monkeypatch.delenv("PY3DTK_DB", raising=False)
+    monkeypatch.setattr("py3dtk.catalog.cache_dir", lambda: tmp_path / "cache")
 
     def _no_network(*args, **kwargs):
         raise AssertionError("tests must not download the catalogue")
 
-    monkeypatch.setattr("threedtk.catalog.download_catalog", _no_network)
+    monkeypatch.setattr("py3dtk.catalog.download_catalog", _no_network)

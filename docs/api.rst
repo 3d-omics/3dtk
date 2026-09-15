@@ -3,12 +3,12 @@ Python API
 
 .. code-block:: python
 
-   import threedtk
+   import py3dtk
 
-   with threedtk.Database() as db:
+   with py3dtk.Database() as db:
        genomes = db.genomes.query(quality="high", genus="Faeciplasma")
 
-Remember the name split: install ``3dtk``, import ``threedtk``.
+Remember the name split: install ``3dtk``, import ``py3dtk``.
 
 Filters use the same names as the CLI options, with underscores instead of
 hyphens. Sequences behave like comma-separated CLI values:
@@ -21,82 +21,82 @@ hyphens. Sequences behave like comma-separated CLI values:
 Database
 --------
 
-.. autoclass:: threedtk.Database
+.. autoclass:: py3dtk.Database
    :members:
    :undoc-members:
 
 Collections
 -----------
 
-.. autoclass:: threedtk.api._Collection
+.. autoclass:: py3dtk.api._Collection
    :members:
 
-.. autoclass:: threedtk.api._FetchableCollection
+.. autoclass:: py3dtk.api._FetchableCollection
    :members:
 
-.. autoclass:: threedtk.api.CountsCollection
+.. autoclass:: py3dtk.api.CountsCollection
    :members:
 
 Records
 -------
 
-.. autoclass:: threedtk.Experiment
-.. autoclass:: threedtk.Specimen
-.. autoclass:: threedtk.Macrosample
-.. autoclass:: threedtk.Cryosection
-.. autoclass:: threedtk.Microsample
-.. autoclass:: threedtk.Genome
-.. autoclass:: threedtk.CountCell
+.. autoclass:: py3dtk.Experiment
+.. autoclass:: py3dtk.Specimen
+.. autoclass:: py3dtk.Macrosample
+.. autoclass:: py3dtk.Cryosection
+.. autoclass:: py3dtk.Microsample
+.. autoclass:: py3dtk.Genome
+.. autoclass:: py3dtk.CountCell
 
 Results
 -------
 
-.. autoclass:: threedtk.ValuesResult
+.. autoclass:: py3dtk.ValuesResult
    :members:
 
-.. autoclass:: threedtk.ValueCount
+.. autoclass:: py3dtk.ValueCount
    :members:
 
-.. autoclass:: threedtk.TargetStats
+.. autoclass:: py3dtk.TargetStats
    :members:
 
-.. autoclass:: threedtk.StatBreakdown
+.. autoclass:: py3dtk.StatBreakdown
    :members:
 
-.. autoclass:: threedtk.FetchSummary
+.. autoclass:: py3dtk.FetchSummary
    :members:
 
-.. autoclass:: threedtk.FetchPlan
+.. autoclass:: py3dtk.FetchPlan
    :members:
 
-.. autoclass:: threedtk.UnfetchableRecord
+.. autoclass:: py3dtk.UnfetchableRecord
    :members:
 
 Count matrices
 --------------
 
-.. autoclass:: threedtk.DenseMatrix
+.. autoclass:: py3dtk.DenseMatrix
    :members:
 
-.. autoclass:: threedtk.MatrixSource
+.. autoclass:: py3dtk.MatrixSource
    :members:
 
 Catalogue
 ---------
 
-.. autodata:: threedtk.PINNED_CATALOG
+.. autodata:: py3dtk.PINNED_CATALOG
 
-.. autoclass:: threedtk.catalog.CatalogRelease
+.. autoclass:: py3dtk.catalog.CatalogRelease
    :members:
 
-.. autofunction:: threedtk.catalog.resolve_catalog_path
+.. autofunction:: py3dtk.catalog.resolve_catalog_path
 
-.. autofunction:: threedtk.catalog.download_catalog
+.. autofunction:: py3dtk.catalog.download_catalog
 
 Exceptions
 ----------
 
-.. autoclass:: threedtk.UnsupportedSchemaVersionError
-.. autoclass:: threedtk.CatalogError
-.. autoclass:: threedtk.ChecksumMismatchError
-.. autoclass:: threedtk.CountsError
+.. autoclass:: py3dtk.UnsupportedSchemaVersionError
+.. autoclass:: py3dtk.CatalogError
+.. autoclass:: py3dtk.ChecksumMismatchError
+.. autoclass:: py3dtk.CountsError

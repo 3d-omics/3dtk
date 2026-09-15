@@ -29,7 +29,7 @@ from rich.progress import (
     TransferSpeedColumn,
 )
 
-from threedtk.manifest import ManifestEntry, append_manifest_entry
+from py3dtk.manifest import ManifestEntry, append_manifest_entry
 
 CHUNK_SIZE = 1024 * 1024
 

@@ -3,7 +3,7 @@
 ``ehitk`` reads ready-made ``url1``/``url2`` columns from its catalogue. The
 3D'omics catalogue stores only browser links and run accessions, so fetching is
 a two-stage operation: query the records, then resolve their accessions through
-the ENA Portal API in batches (see :mod:`threedtk.ena`) before any bytes move.
+the ENA Portal API in batches (see :mod:`py3dtk.ena`) before any bytes move.
 
 Records that cannot produce a download are never silently dropped. A record with
 no accession, an accession ENA does not recognise, and a metabolomics
@@ -17,9 +17,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
-from threedtk.download import DownloadJob, destination_for_url
-from threedtk.ena import DEFAULT_PROTOCOL, EnaRun, resolve_runs
-from threedtk.query import QueryValidationError, query_rows
+from py3dtk.download import DownloadJob, destination_for_url
+from py3dtk.ena import DEFAULT_PROTOCOL, EnaRun, resolve_runs
+from py3dtk.query import QueryValidationError, query_rows
 
 #: Per-target: the record id column, the accession column, and a manifest label.
 FETCHABLE_TARGETS: dict[str, dict[str, str]] = {
@@ -103,7 +103,7 @@ def plan_fetch(
             ``<output_dir>/<target>/<record_id>/``.
         protocol: ``"https"`` (default) or ``"ftp"``.
         ena_cache: Optional accession cache reused across calls.
-        resolver: Optional replacement for :func:`threedtk.ena.resolve_runs`.
+        resolver: Optional replacement for :func:`py3dtk.ena.resolve_runs`.
         progress: Optional callback receiving progress lines.
 
     Returns:

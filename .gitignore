@@ -9,5 +9,6 @@ venv/
 docs/_build/
 manifest.jsonl
 downloads/
-src/threedtk/data/*.sqlite
+.DS_Store
+src/py3dtk/data/*.sqlite
 docs/_build/

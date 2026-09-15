@@ -5,7 +5,7 @@ from __future__ import annotations
 import pytest
 from rich.console import Console
 
-from threedtk.stats import STATS, render_target_stats, target_stats
+from py3dtk.stats import STATS, render_target_stats, target_stats
 
 
 @pytest.mark.parametrize("target", sorted(STATS))

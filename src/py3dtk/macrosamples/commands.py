@@ -6,6 +6,6 @@ URLs through the ENA Portal API at fetch time.
 
 from __future__ import annotations
 
-from threedtk.commands import add_fetch_command, build_target_app
+from py3dtk.commands import add_fetch_command, build_target_app
 
 app = add_fetch_command(build_target_app("macrosamples"), "macrosamples")

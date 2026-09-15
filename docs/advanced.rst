@@ -33,11 +33,11 @@ Using your own catalogue
 .. code-block:: bash
 
    3dtk --db ./3domics-2026.08.29.sqlite genomes query
-   export THREEDTK_DB=./3domics-2026.08.29.sqlite
+   export PY3DTK_DB=./3domics-2026.08.29.sqlite
 
 .. code-block:: python
 
-   with threedtk.Database("./3domics-2026.08.29.sqlite") as db:
+   with py3dtk.Database("./3domics-2026.08.29.sqlite") as db:
        ...
 
 ``3dtk`` validates ``schema_version`` on open and refuses a catalogue it cannot
@@ -78,7 +78,7 @@ To pin a specific release for an analysis:
 
    python scripts/sync_catalog.py --data-version 2026.08.29 --download \
      --output ./3domics-2026.08.29.sqlite
-   export THREEDTK_DB=$PWD/3domics-2026.08.29.sqlite
+   export PY3DTK_DB=$PWD/3domics-2026.08.29.sqlite
 
 Performance
 -----------

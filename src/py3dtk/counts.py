@@ -23,7 +23,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterator, Mapping, Sequence
 
-from threedtk.query import (
+from py3dtk.query import (
     QueryValidationError,
     TAXONOMY_PREFIXES,
     connect,

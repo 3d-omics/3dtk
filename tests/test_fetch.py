@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import pytest
 
-from threedtk.ena import EnaFile, EnaRun
-from threedtk.fetch import format_bytes, plan_fetch
-from threedtk.query import QueryValidationError
+from py3dtk.ena import EnaFile, EnaRun
+from py3dtk.fetch import format_bytes, plan_fetch
+from py3dtk.query import QueryValidationError
 
 
 def _resolver(accessions, **kwargs):

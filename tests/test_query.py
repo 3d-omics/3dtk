@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from threedtk.query import (
+from py3dtk.query import (
     TARGETS,
     QueryValidationError,
     UnsupportedSchemaVersionError,
@@ -220,7 +220,7 @@ def test_unreadable_schema_version_raises(tmp_path) -> None:
 def test_catalog_is_opened_read_only(catalog) -> None:
     import sqlite3
 
-    from threedtk.query import connect
+    from py3dtk.query import connect
 
     connection = connect(catalog)
     try:

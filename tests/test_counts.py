@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from threedtk.counts import (
+from py3dtk.counts import (
     CountsError,
     dense_matrix,
     list_matrix_sources,

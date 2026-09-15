@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from threedtk.query import available_value_fields, resolve_value_field
+from py3dtk.query import available_value_fields, resolve_value_field
 
 
 def value_field_rows(target: str) -> list[dict[str, str]]:

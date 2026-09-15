@@ -3,7 +3,7 @@
 Every target gets the same action grammar -- ``query``, ``values``, ``stats``,
 ``fields``, and ``fetch`` where the records resolve to downloadable files -- so
 a user who knows one target can drive the others. Generating the commands from
-:mod:`threedtk.filters` is what keeps that promise true by construction rather
+:mod:`py3dtk.filters` is what keeps that promise true by construction rather
 than by seven copies staying in sync by hand.
 """
 
@@ -16,10 +16,10 @@ from typing import Any, Callable, Optional
 from rich.console import Console
 import typer
 
-from threedtk.fields import value_field_rows
-from threedtk.filters import FILTERS, filter_key
-from threedtk.output import render_or_export_rows, validate_export_options
-from threedtk.query import (
+from py3dtk.fields import value_field_rows
+from py3dtk.filters import FILTERS, filter_key
+from py3dtk.output import render_or_export_rows, validate_export_options
+from py3dtk.query import (
     DEFAULT_QUERY_LIMIT,
     QueryValidationError,
     TARGETS,
@@ -27,8 +27,8 @@ from threedtk.query import (
     headers_for,
     query_rows,
 )
-from threedtk.stats import render_target_stats
-from threedtk.values import DEFAULT_VALUES_LIMIT, value_rows
+from py3dtk.stats import render_target_stats
+from py3dtk.values import DEFAULT_VALUES_LIMIT, value_rows
 
 _DB_HELP = (
     "Path to an alternate SQLite catalogue. Defaults to the resolved catalogue."
@@ -307,10 +307,10 @@ def build_target_app(target: str) -> typer.Typer:
 
 def add_fetch_command(app: typer.Typer, target: str) -> typer.Typer:
     """Add ``fetch`` to a target whose records resolve to ENA files."""
-    from threedtk.download import download_jobs, write_batch_script
-    from threedtk.fetch import format_bytes, plan_fetch
-    from threedtk.manifest import ManifestEntry, append_manifest_entry
-    from threedtk.terms import ensure_terms_accepted
+    from py3dtk.download import download_jobs, write_batch_script
+    from py3dtk.fetch import format_bytes, plan_fetch
+    from py3dtk.manifest import ManifestEntry, append_manifest_entry
+    from py3dtk.terms import ensure_terms_accepted
 
     label = TARGETS[target].label
     singular = label[:-1]
@@ -477,7 +477,7 @@ def add_counts_commands(app: typer.Typer) -> typer.Typer:
     dense genome x sample matrix from the sparse tables, restoring the dropped
     zeros and following the original axis order recorded in ``matrix_axes``.
     """
-    from threedtk.counts import CountsError, dense_matrix, list_matrix_sources, sample_coordinates
+    from py3dtk.counts import CountsError, dense_matrix, list_matrix_sources, sample_coordinates
 
     def _matrices(**values: Any) -> None:
         console = Console()

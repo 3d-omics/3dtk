@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=69", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -14,7 +14,8 @@ authors = [
 maintainers = [
   {name = "Antton Alberdi", email = "antton.alberdi@sund.ku.dk"},
 ]
-license = {file = "LICENSE"}
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
 keywords = [
   "bioinformatics",
   "cli",
@@ -27,7 +28,6 @@ keywords = [
 classifiers = [
   "Environment :: Console",
   "Intended Audience :: Science/Research",
-  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
@@ -57,7 +57,7 @@ release = [
 ]
 
 [project.scripts]
-"3dtk" = "threedtk.cli:app"
+"3dtk" = "py3dtk.cli:app"
 
 [project.urls]
 Homepage = "https://github.com/3d-omics/3dtk"
@@ -68,13 +68,12 @@ Changelog = "https://github.com/3d-omics/3dtk/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-license-files = ["LICENSE"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-threedtk = ["data/*.json", "data/*.sqlite"]
+py3dtk = ["data/*.json", "data/*.sqlite"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

@@ -42,7 +42,7 @@ jobs:
         id: pin
         run: |
           python - >> "$GITHUB_OUTPUT" <<'PY'
-          from threedtk.catalog import PINNED_CATALOG
+          from py3dtk.catalog import PINNED_CATALOG
           print(f"data_version={PINNED_CATALOG.data_version}")
           PY
 
@@ -78,9 +78,9 @@ jobs:
       - name: Verify a dense export round-trips against the catalogue's provenance
         run: |
           python - <<'PY'
-          import threedtk
+          import py3dtk
 
-          with threedtk.Database() as db:
+          with py3dtk.Database() as db:
               matrices = db.counts.matrices()
               assert matrices, "catalogue reports no count matrices"
               for source in matrices:

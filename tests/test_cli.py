@@ -5,8 +5,8 @@ from __future__ import annotations
 import pytest
 from typer.testing import CliRunner
 
-from threedtk.cli import app
-from threedtk.query import TARGETS
+from py3dtk.cli import app
+from py3dtk.query import TARGETS
 
 runner = CliRunner()
 
@@ -238,10 +238,10 @@ def test_missing_catalogue_is_a_usage_error(tmp_path) -> None:
 
 
 def _stub_ena(monkeypatch, files_per_run: int = 2):
-    from threedtk.ena import EnaFile, EnaRun
+    from py3dtk.ena import EnaFile, EnaRun
 
     monkeypatch.setattr(
-        "threedtk.fetch.resolve_runs",
+        "py3dtk.fetch.resolve_runs",
         lambda accessions, **kwargs: {
             accession: EnaRun(
                 accession,

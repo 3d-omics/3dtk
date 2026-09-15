@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
-import threedtk
-from threedtk.api import CountCell, Database, Genome, Microsample
+import py3dtk
+from py3dtk.api import CountCell, Database, Genome, Microsample
 
 
 def test_database_exposes_every_collection(catalog) -> None:
@@ -106,10 +106,10 @@ def test_fetch_is_available_only_where_files_exist(catalog) -> None:
 def test_fetch_writes_a_batch_script_without_downloading(
     catalog, tmp_path, monkeypatch
 ) -> None:
-    from threedtk.ena import EnaFile, EnaRun
+    from py3dtk.ena import EnaFile, EnaRun
 
     monkeypatch.setattr(
-        "threedtk.fetch.resolve_runs",
+        "py3dtk.fetch.resolve_runs",
         lambda accessions, **kwargs: {
             accession: EnaRun(
                 accession,
@@ -152,4 +152,4 @@ def test_missing_catalogue_raises(tmp_path) -> None:
 
 def test_public_names_are_exported() -> None:
     for name in ("Database", "Genome", "Microsample", "PINNED_CATALOG", "__version__"):
-        assert hasattr(threedtk, name)
+        assert hasattr(py3dtk, name)

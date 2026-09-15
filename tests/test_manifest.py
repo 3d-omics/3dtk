@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from threedtk.manifest import ManifestEntry, append_manifest_entry
+from py3dtk.manifest import ManifestEntry, append_manifest_entry
 
 
 def _entry(**overrides):

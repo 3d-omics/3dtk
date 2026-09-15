@@ -6,8 +6,8 @@ import hashlib
 
 import pytest
 
-from threedtk import catalog as catalog_module
-from threedtk.catalog import (
+from py3dtk import catalog as catalog_module
+from py3dtk.catalog import (
     PINNED_CATALOG,
     CatalogError,
     CatalogRelease,
@@ -48,7 +48,7 @@ def test_pinned_release_names_a_version_doi_not_the_concept() -> None:
 
 
 def test_explicit_path_wins_over_everything(tmp_path, monkeypatch) -> None:
-    monkeypatch.setenv("THREEDTK_DB", str(tmp_path / "env.sqlite"))
+    monkeypatch.setenv("PY3DTK_DB", str(tmp_path / "env.sqlite"))
     assert resolve_catalog_path(tmp_path / "explicit.sqlite") == (
         tmp_path / "explicit.sqlite"
     )
@@ -57,7 +57,7 @@ def test_explicit_path_wins_over_everything(tmp_path, monkeypatch) -> None:
 def test_environment_variable_is_used_when_no_argument(tmp_path, monkeypatch) -> None:
     target = tmp_path / "env.sqlite"
     target.write_bytes(b"x")
-    monkeypatch.setenv("THREEDTK_DB", str(target))
+    monkeypatch.setenv("PY3DTK_DB", str(target))
     assert resolve_catalog_path() == target.resolve()
 
 
@@ -89,7 +89,7 @@ def test_offline_resolution_raises_an_actionable_error(tmp_path, monkeypatch) ->
     with pytest.raises(CatalogError) as excinfo:
         resolve_catalog_path(auto_download=False, release=_release(tmp_path))
     message = str(excinfo.value)
-    assert "3dtk database sync" in message and "THREEDTK_DB" in message
+    assert "3dtk database sync" in message and "PY3DTK_DB" in message
 
 
 def test_download_verifies_the_checksum(tmp_path) -> None:
@@ -157,5 +157,5 @@ def test_source_label_identifies_where_the_catalogue_came_from(
     other = tmp_path / "other.sqlite"
     other.write_bytes(PAYLOAD)
     assert catalog_source_label(other, release) == "custom"
-    monkeypatch.setenv("THREEDTK_DB", str(other))
-    assert catalog_source_label(other, release) == "environment (THREEDTK_DB)"
+    monkeypatch.setenv("PY3DTK_DB", str(other))
+    assert catalog_source_label(other, release) == "environment (PY3DTK_DB)"

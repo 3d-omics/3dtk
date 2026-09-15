@@ -1,6 +1,6 @@
 """3D'omics ToolKit.
 
-Installed as the ``3dtk`` distribution; imported as ``threedtk`` because Python
+Installed as the ``3dtk`` distribution; imported as ``py3dtk`` because Python
 identifiers cannot begin with a digit.
 """
 
@@ -10,7 +10,7 @@ from importlib.metadata import PackageNotFoundError, version as package_version
 from pathlib import Path
 import re
 
-from threedtk.api import (
+from py3dtk.api import (
     CatalogError,
     ChecksumMismatchError,
     CountCell,
@@ -33,7 +33,7 @@ from threedtk.api import (
     ValueCount,
     ValuesResult,
 )
-from threedtk.catalog import PINNED_CATALOG
+from py3dtk.catalog import PINNED_CATALOG
 
 __all__ = [
     "__version__",

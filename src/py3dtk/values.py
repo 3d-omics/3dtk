@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Mapping
 
-from threedtk.query import (
+from py3dtk.query import (
     QueryValidationError,
     build_filtered_source_query,
     connect,

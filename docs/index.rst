@@ -10,7 +10,7 @@ checksummed SQLite artefact deposited on Zenodo under a citable DOI.
 
    Python identifiers cannot begin with a digit, so ``import 3dtk`` is a
    ``SyntaxError``. Install the ``3dtk`` distribution and import the
-   ``threedtk`` package — the same split as ``scikit-learn`` → ``sklearn``.
+   ``py3dtk`` package — the same split as ``scikit-learn`` → ``sklearn``.
 
    .. code-block:: bash
 
@@ -18,7 +18,7 @@ checksummed SQLite artefact deposited on Zenodo under a citable DOI.
 
    .. code-block:: python
 
-      import threedtk
+      import py3dtk
 
 The data hierarchy
 ------------------
@@ -47,9 +47,9 @@ Quick example
 
 .. code-block:: python
 
-   import threedtk
+   import py3dtk
 
-   with threedtk.Database() as db:
+   with py3dtk.Database() as db:
        genomes = db.genomes.query(quality="high", genus="Faeciplasma")
        matrix = db.counts.export(experiment_id="G", level="micro")
 

@@ -11,14 +11,14 @@ The name split
 --------------
 
 The distribution and the console script are ``3dtk``; the import package is
-``threedtk``:
+``py3dtk``:
 
 =======================  ============
 Surface                  Name
 =======================  ============
 PyPI distribution        ``3dtk``
 Console script           ``3dtk``
-Import package           ``threedtk``
+Import package           ``py3dtk``
 =======================  ============
 
 This is not a typo. Python identifiers cannot begin with a digit, so

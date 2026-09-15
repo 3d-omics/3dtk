@@ -9,7 +9,7 @@ from pathlib import Path
 import pytest
 from rich.console import Console
 
-from threedtk.download import (
+from py3dtk.download import (
     DownloadJob,
     _GzipChecker,
     IntegrityError,
@@ -48,7 +48,7 @@ class _FakeResponse:
 def serve(monkeypatch):
     def _serve(body: bytes, *, content_length: int | None = None):
         monkeypatch.setattr(
-            "threedtk.download.requests.get",
+            "py3dtk.download.requests.get",
             lambda url, **kwargs: _FakeResponse(body, content_length=content_length),
         )
 
@@ -129,7 +129,7 @@ def test_network_failure_is_reported_not_raised(monkeypatch, tmp_path) -> None:
     def boom(url, **kwargs):
         raise OSError("connection refused")
 
-    monkeypatch.setattr("threedtk.download.requests.get", boom)
+    monkeypatch.setattr("py3dtk.download.requests.get", boom)
     result = _run(_job(tmp_path), tmp_path)
     assert result.status == "failed"
     assert "connection refused" in result.error

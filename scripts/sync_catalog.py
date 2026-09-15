@@ -4,7 +4,7 @@
 Two jobs, both maintainer-time (never runtime):
 
 ``--pin`` resolves a release under the concept and rewrites
-``PINNED_CATALOG`` in ``src/threedtk/catalog.py`` to match. This is how a new
+``PINNED_CATALOG`` in ``src/py3dtk/catalog.py`` to match. This is how a new
 ``data_version`` is adopted.
 
 ``--download`` fetches the resolved release into the user cache (or
@@ -30,12 +30,12 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from threedtk.catalog import (  # noqa: E402
+from py3dtk.catalog import (  # noqa: E402
     CONCEPT_RECID,
     PINNED_CATALOG,
     cached_catalog_path,
 )
-from threedtk.query import (  # noqa: E402
+from py3dtk.query import (  # noqa: E402
     SUPPORTED_SCHEMA_VERSIONS,
     UnsupportedSchemaVersionError,
     read_catalog_meta,
@@ -43,7 +43,7 @@ from threedtk.query import (  # noqa: E402
 )
 
 DEFAULT_ZENODO_URL = "https://zenodo.org"
-CATALOG_MODULE = ROOT / "src" / "threedtk" / "catalog.py"
+CATALOG_MODULE = ROOT / "src" / "py3dtk" / "catalog.py"
 
 
 class SyncError(RuntimeError):
@@ -253,7 +253,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--pin",
         action="store_true",
-        help="Rewrite PINNED_CATALOG in src/threedtk/catalog.py to the resolved release.",
+        help="Rewrite PINNED_CATALOG in src/py3dtk/catalog.py to the resolved release.",
     )
     parser.add_argument(
         "--download",

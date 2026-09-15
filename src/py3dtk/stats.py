@@ -18,7 +18,7 @@ from typing import Any, Mapping
 from rich.console import Console
 from rich.table import Table
 
-from threedtk.query import (
+from py3dtk.query import (
     GENOME_QUALITY_CASE_EXPR,
     build_filtered_source_query,
     connect,

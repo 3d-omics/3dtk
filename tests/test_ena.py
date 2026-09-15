@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from threedtk.ena import (
+from py3dtk.ena import (
     DEFAULT_BATCH_SIZE,
     EnaError,
     parse_filereport,

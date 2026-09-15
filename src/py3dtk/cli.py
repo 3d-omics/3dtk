@@ -10,8 +10,8 @@ from rich.table import Table
 import typer
 from typer.core import TyperGroup
 
-from threedtk import __version__
-from threedtk.catalog import (
+from py3dtk import __version__
+from py3dtk.catalog import (
     PINNED_CATALOG,
     CatalogError,
     cache_dir,
@@ -20,14 +20,14 @@ from threedtk.catalog import (
     download_catalog,
     file_sha256,
 )
-from threedtk.counts_cli.commands import app as counts_app
-from threedtk.cryosections.commands import app as cryosections_app
-from threedtk.experiments.commands import app as experiments_app
-from threedtk.genomes.commands import app as genomes_app
-from threedtk.macrosamples.commands import app as macrosamples_app
-from threedtk.microsamples.commands import app as microsamples_app
-from threedtk.query import connect, read_catalog_meta, resolve_catalog_path
-from threedtk.specimens.commands import app as specimens_app
+from py3dtk.counts_cli.commands import app as counts_app
+from py3dtk.cryosections.commands import app as cryosections_app
+from py3dtk.experiments.commands import app as experiments_app
+from py3dtk.genomes.commands import app as genomes_app
+from py3dtk.macrosamples.commands import app as macrosamples_app
+from py3dtk.microsamples.commands import app as microsamples_app
+from py3dtk.query import connect, read_catalog_meta, resolve_catalog_path
+from py3dtk.specimens.commands import app as specimens_app
 
 ROOT_TITLE = "3D'omics ToolKit"
 ROOT_DESCRIPTION = (
