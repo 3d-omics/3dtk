@@ -1,8 +1,8 @@
 # 3dtk — the 3D'omics ToolKit
 
 [![CI](https://github.com/3d-omics/3dtk/actions/workflows/ci.yml/badge.svg)](https://github.com/3d-omics/3dtk/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/3dtk.svg)](https://pypi.org/project/3dtk/)
-[![Python versions](https://img.shields.io/pypi/pyversions/3dtk.svg)](https://pypi.org/project/3dtk/)
+[![PyPI](https://img.shields.io/pypi/v/3dtk)](https://pypi.org/project/3dtk/)
+[![Python versions](https://img.shields.io/pypi/pyversions/3dtk)](https://pypi.org/project/3dtk/)
 [![Documentation](https://readthedocs.org/projects/3dtk/badge/?version=latest)](https://3dtk.readthedocs.io/)
 [![Catalogue DOI](https://img.shields.io/badge/data%20DOI-10.5281%2Fzenodo.22159111-blue)](https://doi.org/10.5281/zenodo.22159111)
 [![Licence](https://img.shields.io/badge/licence-GPLv3-blue)](LICENSE)
