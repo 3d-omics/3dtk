@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 import pytest
 from typer.testing import CliRunner
 
@@ -12,6 +14,7 @@ runner = CliRunner()
 
 TARGET_NAMES = sorted(TARGETS)
 FETCHABLE = ["macrosamples", "microsamples"]
+ANSI_ESCAPE = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]")
 
 
 def run(catalog, *args, **kwargs):
@@ -19,8 +22,8 @@ def run(catalog, *args, **kwargs):
 
 
 def error_output(result) -> str:
-    """Return CLI diagnostics regardless of the Click/Typer output stream."""
-    return result.output + result.stderr
+    """Return unstyled CLI diagnostics regardless of the output stream."""
+    return ANSI_ESCAPE.sub("", result.output + result.stderr)
 
 
 def test_version_is_reported() -> None:
