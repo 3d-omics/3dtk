@@ -85,9 +85,6 @@ Terms of use
 ------------
 
 A data-usage panel is shown before the first download of a session; pass
-``--accept-terms`` to skip it.
-
-.. note::
-
-   The wording currently shipped is a placeholder marked ``TODO`` pending the
-   consortium's agreed text. The catalogue itself is CC-BY-4.0.
+``--accept-terms`` to skip it. It states the catalogue's CC-BY-4.0 licence and
+asks that any publication using the data cite the catalogue's concept DOI
+(``10.5281/zenodo.22159111``) and the originating 3D'omics experiment.

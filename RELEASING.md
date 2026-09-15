@@ -139,18 +139,18 @@ is a *separate* concept from the **catalogue** concept DOI that
 
 ---
 
-## Outstanding pre-release tasks
+## Outstanding tasks
 
-- [ ] **Data usage terms.** `src/py3dtk/terms.py` ships placeholder wording
-      marked `TODO`. Replace it with the consortium's agreed text and contact
-      address before the first public release, or drop the gate.
+- [x] **Data usage terms.** Since 0.1.1, `src/py3dtk/terms.py` states only what
+      the catalogue records: the CC-BY-4.0 licence, the concept DOI to cite, and
+      the issue tracker for questions. Extend `TERMS_MESSAGE` if the consortium
+      agrees further terms.
 - [ ] **`py3dtk` name reservation.** After the first release, publish a stub
       `py3dtk` distribution that simply depends on `3dtk`, so the import name
       cannot be squatted and `pip install py3dtk` works. Agreed as a post-v1
       step.
-- [ ] **Read the Docs.** Create the `3dtk` project. The subdomain
-      `3dtk.readthedocs.io` is valid and available (a leading digit is legal in
-      a hostname; RTD serves it and currently returns a project-404).
+- [x] **Read the Docs.** Live at <https://3dtk.readthedocs.io/>, building from
+      `.readthedocs.yaml` on every push to `main`.
 - [ ] **Airtable link fields.** Specimen `treatment_group` contains raw Airtable
       record ids (`recMXDODTfnGcavHn`) rather than readable labels. `3dtk`
       displays `treatment` / `treatment_name` instead and keeps

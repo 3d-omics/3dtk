@@ -12,6 +12,8 @@ data catalogue — from a command line and a Python API, with **no credentials a
 no server**. `3dtk` reads a published, checksummed SQLite artefact deposited on
 Zenodo under a citable DOI.
 
+**Documentation:** <https://3dtk.readthedocs.io/>
+
 ```bash
 pip install 3dtk
 3dtk database sync          # fetch the catalogue once (59 MB, checksum-verified)

@@ -3,7 +3,7 @@
   "@type": "SoftwareSourceCode",
   "name": "3dtk",
   "description": "A Python package and command-line tool to find, summarise, export, and download records from the 3D'omics data catalogue.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "programmingLanguage": "Python",
   "runtimePlatform": "Python 3.10+",
   "license": "https://spdx.org/licenses/GPL-3.0-or-later",

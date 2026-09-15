@@ -5,6 +5,23 @@ All notable changes to `3dtk` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-09-15
+
+### Changed
+
+- The data-usage terms shown before a download now state the catalogue's
+  CC-BY-4.0 licence, the concept DOI to cite, and where to ask questions,
+  replacing the placeholder wording marked `TODO`.
+- The README links the documentation at <https://3dtk.readthedocs.io/> right
+  below the introduction.
+
+### Fixed
+
+- The README's PyPI and Python-version badges no longer show "package or
+  version not found"; GitHub had cached them from before the first release.
+- Documentation pages no longer repeat "3dtk documentation" in the browser tab
+  title.
+
 ## [0.1.0] - 2026-09-15
 
 ### Added

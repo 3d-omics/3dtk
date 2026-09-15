@@ -1,9 +1,8 @@
 """Data-usage terms gate shown before downloads.
 
-TODO(3d-omics): replace :data:`TERMS_MESSAGE` with the project's actual data
-usage policy and contact address before the first public release. The text
-below deliberately states only what the catalogue itself records (the CC-BY-4.0
-licence) rather than inventing a coordination policy.
+The wording states only what the catalogue itself records -- its CC-BY-4.0
+licence and how to cite it -- rather than inventing a coordination policy. If
+the consortium agrees further terms, extend :data:`TERMS_MESSAGE` with them.
 """
 
 from __future__ import annotations
@@ -13,14 +12,11 @@ from rich.panel import Panel
 from rich.prompt import Confirm
 import typer
 
-# TODO(3d-omics): confirm wording and contact address with the consortium.
 TERMS_MESSAGE = (
     "The 3D'omics data catalogue is published under CC-BY-4.0. If you use these "
     "data in a publication, cite the catalogue via its concept DOI "
     "(10.5281/zenodo.22159111) and the originating 3D'omics experiment.\n\n"
-    "[yellow]TODO: this placeholder stands in for the 3D'omics data usage terms. "
-    "Replace it with the consortium's agreed wording and contact address before "
-    "the first public release.[/yellow]\n\n"
+    "Questions about the data: https://github.com/3d-omics/3dtk/issues\n\n"
     "If you agree, you may use the --accept-terms flag in the future to suppress "
     "this prompt."
 )

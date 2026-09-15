@@ -40,7 +40,8 @@ def test_non_interactive_input_gives_actionable_advice(monkeypatch, capsys) -> N
     assert "--accept-terms" in capsys.readouterr().out
 
 
-def test_placeholder_wording_is_flagged_for_replacement() -> None:
-    """The gate must not assert invented 3D'omics policy before it is agreed."""
-    assert "TODO" in TERMS_MESSAGE
+def test_terms_state_the_licence_and_citation() -> None:
+    """The gate states what the catalogue records, not invented policy."""
     assert "CC-BY-4.0" in TERMS_MESSAGE
+    assert "10.5281/zenodo.22159111" in TERMS_MESSAGE
+    assert "TODO" not in TERMS_MESSAGE
